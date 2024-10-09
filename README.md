@@ -1,4 +1,6 @@
-Add into dependencies:
+## Installation
+
+Add the following dependency to your `pubspec.yaml` file:
 ```yaml
   easy_gap:
     git:
