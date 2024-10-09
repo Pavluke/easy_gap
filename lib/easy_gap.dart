@@ -8,7 +8,7 @@ extension GapExt<T extends Widget> on List<T> {
   List<Widget> sliverGap(double dimension, {bool removeLast = true}) =>
       _gapExtBuildWith(SliverGap(dimension));
 
-  List<Widget> _gapExtBuildWith(Widget widget) => isEmpty
-      ? []
-      : expand((w) => [w, if (!(indexOf(w) == indexOf(last))) widget]).toList();
+  List<Widget> _gapExtBuildWith(Widget gap) => isEmpty
+      ? this
+      : expand((w) => [w, if (indexOf(w) != indexOf(last)) gap]).toList();
 }
