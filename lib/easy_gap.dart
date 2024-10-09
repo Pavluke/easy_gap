@@ -3,16 +3,12 @@ import 'package:gap/gap.dart';
 
 extension GapExt<T extends Widget> on List<T> {
   List<Widget> gap(double dimension, {bool removeLast = true}) =>
-      _gapExtBuildWith(Gap(dimension), removeLast: removeLast);
+      _gapExtBuildWith(Gap(dimension));
 
   List<Widget> sliverGap(double dimension, {bool removeLast = true}) =>
-      _gapExtBuildWith(SliverGap(dimension), removeLast: removeLast);
+      _gapExtBuildWith(SliverGap(dimension));
 
-  List<Widget> _gapExtBuildWith(Widget widget, {required bool removeLast}) =>
-      isEmpty
-          ? []
-          : expand((w) => [
-                w,
-                if (!(removeLast && indexOf(w) == indexOf(last))) widget
-              ]).toList();
+  List<Widget> _gapExtBuildWith(Widget widget) => isEmpty
+      ? []
+      : expand((w) => [w, if (!(indexOf(w) == indexOf(last))) widget]).toList();
 }
