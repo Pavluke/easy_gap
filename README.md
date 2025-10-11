@@ -1,55 +1,130 @@
 # Easy Gap
-Flutter extension for easily adding gaps between children widgets inside Flex widgets such as Columns and Rows or scrolling views.
 
 [![Pub](https://img.shields.io/pub/v/easy_gap.svg)](https://pub.dartlang.org/packages/easy_gap)
 
-### Introduction
+**En** | [Ru](README_RU.md)
 
-When it comes to add empty space between children widgets inside a `Column` or a `Row`, we have multiple options:
-- We can either add a `Padding` around these widgets but it's very verbose
-- Or we can add `SizedBox` widgets between them.
+Add gaps between widgets in Flutter easily and flexibly - via extension methods
+or constructors.
 
-## Getting started
+## Installation
 
-In your library add the following import:
+```yaml
+dependencies:
+  easy_gap: ^1.1.0
+```
 
 ```dart
 import 'package:easy_gap/easy_gap.dart';
 ```
 
-Then you just have to call method `gap()` for widget list with the specified extent.
+## Usage
+
+### SpacedList Constructor
+
+Alternative syntax using constructors:
 
 ```dart
-return Column(
-  children: <Widget>[
-    Container(color: Colors.red, width: 20),
-    Container(color: Colors.green, width: 20),
-    Container(color: Colors.blue, width: 20),
-  ].gap(20) // Adds an empty spaces of 20 pixels between widgets.
-);
+ListView(
+  children: SpacedList(
+    spacing: 16,
+    children: [...],
+  ),
+)
+
+CustomScrollView(
+  slivers: SpacedList.slivers(
+    spacing: 20,
+    slivers: [...],
+  ),
+)
 ```
 
-The `gap()` method also works inside `Scrollable` widgets such as `ListViews`. In these cases, it will occupy the space in the same direction as the `Scrollable`.
+### Extension Methods
 
-### SliverGap
-
-There is also a sliver version of the `gap()`:
+Add `.gap()` or `.sliverGap()` to any widget list:
 
 ```dart
-return CustomScrollView(
-  slivers: <Widget>[
-  // Some slivers
-  ].sliverGap(20) // Adds an empty spaces of 20 pixels between slivers.
-);
+ListView(
+  children: [
+    Text('Item 1'),
+    Text('Item 2'),
+    Text('Item 3'),
+  ].gap(16),
+)
+
+CustomScrollView(
+  slivers: [
+    SliverList(...),
+    SliverGrid(...),
+  ].sliverGap(20),
+)
 ```
+
+## API
+
+### Extension Methods
+
+```dart
+List<Widget> gap(
+  double spacing,              // Required: Gap size in pixels
+  {
+    double? crossAxisExtent,   // Optional: Gap size along cross axis (e.g., full width in Column)
+    Color? color,              // Optional: Fill color for debugging gaps
+  }
+)
+```
+
+```dart
+List<Widget> sliverGap(
+  double spacing,              // Required: Gap size in pixels
+  {
+    Color? color,              // Optional: Fill color for debugging gaps
+  }
+)
+```
+
+### SpacedList Constructors
+
+```dart
+SpacedList({
+  required double spacing,        // Required: Gap size in pixels
+  required List<Widget> children, // Required: List of widgets
+  double? crossAxisExtent,        // Optional: Gap size along cross axis
+  Color? color,                   // Optional: Fill color for debugging gaps
+})
+```
+
+```dart
+SpacedList.slivers({
+  required double spacing,        // Required: Gap size in pixels
+  required List<Widget> slivers,  // Required: List of slivers
+  Color? color,                   // Optional: Fill color for debugging gaps
+})
+```
+
+## Example
+
+Check out the
+[example app](https://github.com/pavluke/easy_gap/tree/main/example) for a
+complete demo showcasing all features.
 
 ## Changelog
 
-Please see the [Changelog](https://github.com/pavluke/easy_gap/blob/main/CHANGELOG.md) page to know what's recently changed.
+See the [Changelog](https://github.com/pavluke/easy_gap/blob/main/CHANGELOG.md)
+for recent updates.
 
-## Contributions
+## Contributing
 
-Feel free to contribute to this project.
+Contributions are welcome!
 
-If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/pavluke/easy_gap/issues).  
-If you fixed a bug or implemented a feature, please send a [pull request](https://github.com/pavluke/easy_gap/pulls).
+- Found a bug? [Open an issue](https://github.com/pavluke/easy_gap/issues)
+- Have a feature request?
+  [Open an issue](https://github.com/pavluke/easy_gap/issues)
+- Want to contribute?
+  [Submit a pull request](https://github.com/pavluke/easy_gap/pulls)
+
+## License
+
+MIT License - see
+[LICENSE](https://github.com/pavluke/easy_gap/blob/main/LICENSE) for details.
